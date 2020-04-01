@@ -29,6 +29,31 @@ if (cluster.isMaster) {
     let serverResp = '';
 
 
+    let scanTable = function(req, res) {
+        let params = {
+            TableName: ddbTable, // give it your table name
+            Select: "ALL_ATTRIBUTES"
+        };
+
+        ddb.scan(params, function(err, data) {
+            if (err) {
+                let returnStatus = 500;
+
+                if (err.code === 'ConditionalCheckFailedException') {
+                    returnStatus = 409;
+                }
+
+                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
+                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
+            } else {
+
+                serverResp += "\r\n" + JSON.stringify(data, null, 4);
+            }
+
+            res.render('tableView', JSON.stringify(data, null, 4));
+            res.render('serverResp', serverResp);
+        });
+    };
 
 
     AWS.config.region = process.env.REGION;
@@ -74,55 +99,19 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                serverResp += '\r\n'+res+'\r\n';
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-                console.log('DDB Error: ' + err);
+                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
+                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
             } else {
 
-                serverResp += "\r\n" + JSON.stringify(messageObj);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
             }
+
+            res.render('serverResp', serverResp);
         });
     });
 
     app.get('/readall', function(req, res) {
-        let dynamoClient = new AWS.DynamoDB.DocumentClient();
-        let params = {
-            TableName: ddbTable, // give it your table name
-            Select: "ALL_ATTRIBUTES"
-        };
-
-        dynamoClient.scan(params, function(err, data) {
-            if (err) {
-                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-                serverResp += "\r\n" + JSON.stringify(err);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-            } else {
-                serverResp += "\r\nGetItem succeeded:" + JSON.stringify(data);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-                console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-            }
-        });
+        scanTable(req, res);
     });
 
 
