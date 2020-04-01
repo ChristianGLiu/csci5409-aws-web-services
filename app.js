@@ -31,13 +31,11 @@ if (cluster.isMaster) {
 
 
 
-    AWS.config.region = process.env.REGION
+    AWS.config.region = process.env.REGION;
 
-    let sns = new AWS.SNS();
     let ddb = new AWS.DynamoDB();
 
     let ddbTable =  process.env.TABLE;
-    let snsTopic =  process.env.TOPIC;
     let app = express();
 
     app.set('view engine', 'ejs');
@@ -60,8 +58,7 @@ if (cluster.isMaster) {
         };
 
         let messageObj = {'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
-            'Subject': 'New part added ('+req.body.part_desc+')',
-            'TopicArn': snsTopic};
+            'Subject': 'New part added ('+req.body.part_desc+')'};
 
 
 
@@ -93,14 +90,6 @@ if (cluster.isMaster) {
                     serverResp: serverResp,
                     theme: process.env.THEME || 'flatly',
                     flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-                sns.publish(messageObj, function(err, data) {
-                    if (err) {
-                        res.status(500).end();
-                        console.log('SNS Error: ' + err);
-                    } else {
-                        res.status(201).end();
-                    }
                 });
             }
         });
@@ -153,8 +142,7 @@ if (cluster.isMaster) {
 
         ddb.getItem(params, function(err, data) {
             let messageObj = {'Message': data,
-                'Subject': 'updated part ('+req.body.part_desc+')',
-                'TopicArn': snsTopic};
+                'Subject': 'updated part ('+req.body.part_desc+')'};
             if (err) {
                 let returnStatus = 500;
 
@@ -177,14 +165,6 @@ if (cluster.isMaster) {
                     serverResp: serverResp,
                     theme: process.env.THEME || 'flatly',
                     flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-                sns.publish(messageObj, function(err, data) {
-                    if (err) {
-                        res.status(500).end();
-                        console.log('SNS Error: ' + err);
-                    } else {
-                        res.status(201).end();
-                    }
                 });
             }
         });
@@ -235,8 +215,7 @@ if (cluster.isMaster) {
             'Expected': { order_id: { Exists: false } }
         }, function(err, data) {
             let messageObj = {'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
-                'Subject': 'updated part ('+req.body.part_desc+')',
-                'TopicArn': snsTopic};
+                'Subject': 'updated part ('+req.body.part_desc+')'};
             if (err) {
                 let returnStatus = 500;
 
@@ -257,14 +236,6 @@ if (cluster.isMaster) {
                     serverResp: serverResp,
                     theme: process.env.THEME || 'flatly',
                     flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-                sns.publish(messageObj, function(err, data) {
-                    if (err) {
-                        res.status(500).end();
-                        console.log('SNS Error: ' + err);
-                    } else {
-                        res.status(201).end();
-                    }
                 });
             }
         });
