@@ -27,6 +27,7 @@ if (cluster.isMaster) {
     let express = require('express');
     let bodyParser = require('body-parser');
     let serverResp = '';
+    let tableView = '';
 
 
     let scanTable = function(req, res) {
@@ -43,15 +44,13 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
+                res.status(returnStatus).send(JSON.stringify(err, null, 4));
                 console.log('DDB Error: ' + JSON.stringify(err, null, 4));
             } else {
 
-                serverResp += "\r\n" + JSON.stringify(data, null, 4);
+                tableView = JSON.stringify(data, null, 4);
+                res.status(200).send(tableView);
             }
-
-            res.render('tableView', JSON.stringify(data, null, 4));
-            res.render('serverResp', serverResp);
         });
     };
 
@@ -72,7 +71,9 @@ if (cluster.isMaster) {
             static_path: 'static',
             serverResp: serverResp,
             theme: process.env.THEME || 'flatly',
-            flask_debug: process.env.FLASK_DEBUG || 'false'
+            flask_debug: process.env.FLASK_DEBUG || 'false',
+            tableView: tableView
+
         });
     });
 

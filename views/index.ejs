@@ -54,9 +54,8 @@
 </div> <!-- /container -->
 
 <div class="col-md-12">
-    <div id="table" class="col-md-5" style="overflow-y:scroll;"><%=tableView%></div>
-    <div id="log" class="col-md-5" style="overflow-y:scroll;"><%=serverResp%></div>
-
+    <div id="table" class="col-md-5" style="overflow-y:scroll;"><%= tableView %></div>
+    <div id="log" class="col-md-5" style="overflow-y:scroll;"><%= serverResp %></div>
 </div>
 
 <script src="<%= static_path + "/jquery/jquery-1.11.3.min.js" %>"></script>
@@ -65,7 +64,8 @@
     $(document).ready(function () {
         $.get("/readall", $("#part-form").serialize(),
             function (data) {
-                console.log("success msg:", data);
+                $('#log').html("get msg:" + data);
+                $("#table").html(data);
             }
         )
             .error(function (xhr) {
@@ -81,19 +81,19 @@
                 // $("#signupModal").modal('hide');
             });
 
-        $("#create").click(function(){
+        $("#create").click(function () {
             $("#part_no").show();
             $("#part_desc").show();
         });
-        $("#read").click(function(){
+        $("#read").click(function () {
             $("#part_no").show();
             $("#part_desc").hide();
         });
-        $("#update").click(function(){
+        $("#update").click(function () {
             $("#part_no").show();
             $("#part_desc").show();
         });
-        $("#delete").click(function(){
+        $("#delete").click(function () {
             $("#part_no").show();
             $("#part_desc").hide();
         });
