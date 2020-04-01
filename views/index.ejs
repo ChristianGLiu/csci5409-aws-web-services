@@ -54,7 +54,17 @@
 </div> <!-- /container -->
 
 <div class="col-md-12">
-    <div id="table" class="col-md-5" style="overflow-y:scroll;"><%= tableView %></div>
+    <div id="table" class="col-md-5" style="overflow-y:scroll;">
+        <table cellpadding="2" cellspacing="2" border="0" bgcolor="#dfdfdf" width="80%" align="center">
+            <thead>
+            <tr>
+                <th width="20%">Part_no</th>
+                <th width="80%">Part_Description</th>
+            </tr>
+            </thead>
+            <tbody id="tableData"></tbody>
+        </table>
+    </div>
     <div id="log" class="col-md-5" style="overflow-y:scroll;"><%= serverResp %></div>
 </div>
 
@@ -64,17 +74,26 @@
     $(document).ready(function () {
         $.get("/readall", $("#part-form").serialize(),
             function (data) {
-                $('#log').html("get msg:" + data);
-                $("#table").html(data);
+                $('#log').html("get msg:" + JSON.stringify(data, null, 4));
+                let k = '<tbody>';
+                let mainObj = data.items
+                for(i = 0;i < mainObj.length; i++){
+                    k+= '<tr>';
+                    k+= '<td>' + mainObj[i].part_no + '</td>';
+                    k+= '<td>' + mainObj[i].part_desc + '</td>';
+                    k+= '</tr>';
+                }
+                k+='</tbody>';
+                document.getElementById('tableData').innerHTML = k;
             }
         )
             .error(function (xhr) {
                 switch (xhr.status) {
                     case 409:
-                        console.log("success msg:", xhr);
+                        console.log("error msg:", xhr);
                         break;
                     default:
-                        console.log("success msg:", xhr);
+                        console.log("error msg:", xhr);
                 }
             })
             .always(function () {

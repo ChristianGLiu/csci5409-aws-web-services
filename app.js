@@ -48,7 +48,7 @@ if (cluster.isMaster) {
                 console.log('DDB Error: ' + JSON.stringify(err, null, 4));
             } else {
 
-                tableView = JSON.stringify(data, null, 4);
+                tableView = data;
                 res.status(200).send(tableView);
             }
         });
@@ -102,12 +102,13 @@ if (cluster.isMaster) {
 
                 serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
                 console.log('DDB Error: ' + JSON.stringify(err, null, 4));
+                res.status(returnStatus).send({msg:serverResp});
             } else {
-
                 serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
+                data.msg = serverResp;
+                res.status(200).send(data);
             }
 
-            res.render('serverResp', serverResp);
         });
     });
 
@@ -117,11 +118,6 @@ if (cluster.isMaster) {
 
 
     app.get('/read', function(req, res) {
-        let item = {
-            'part_no': {'N': req.body.part_no},
-            'part_desc': {'S': req.body.part_desc}
-        };
-
         let params = {
             TableName: ddbTable,
             Key: {
@@ -140,22 +136,13 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                serverResp += "\r\n" + JSON.stringify(err);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
+                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
+                res.status(returnStatus).send({msg:serverResp});
             } else {
-                serverResp += "\r\n" + JSON.stringify(messageObj);
-                serverResp += "\r\nGetItem succeeded:" + JSON.stringify(data);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
+                data.msg = serverResp;
+                res.status(200).send(data);
             }
         });
     });
@@ -245,22 +232,18 @@ if (cluster.isMaster) {
         ddb.deleteItem(params, function(err, data) {
             if (err) {
                 console.log("Error", err);
-                serverResp += "\r\n" + JSON.stringify(err);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                let returnStatus = 500;
+
+                if (err.code === 'ConditionalCheckFailedException') {
+                    returnStatus = 409;
+                }
+                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
+                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
+                res.status(returnStatus).send({msg:serverResp});
             } else {
-                console.log("Success", data);
-                serverResp += "\r\nDeleteItem succeeded:" + JSON.stringify(data);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
+                data.msg = serverResp;
+                res.status(200).send(data);
             }
         });
     });
