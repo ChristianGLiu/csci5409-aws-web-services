@@ -1,0 +1,16 @@
+    {
+    	  "Version": "2020-04-01",
+	  	  "Statement": [
+		  	    {
+			    	      "Effect": "Allow",
+				      	      "Action":   [ "dynamodb:DbName" ],
+					      	      "Resource": [ "*" ]
+						      	    },
+							    	    {
+								    	      "Effect": "Allow",
+									      	      "Action":   [ "sns:Publish" ],
+										      	      "Resource": [ "*" ]
+											      	    }
+												    	  ]
+													  	}
+

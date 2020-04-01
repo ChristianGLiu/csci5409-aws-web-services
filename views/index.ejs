@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>csci5409-aws-web-services</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<%= static_path + "/bootstrap/css/theme/" + theme + "/bootstrap.css" %>" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<%= static_path + "/bootstrap/css/jumbotron-narrow.css" %>" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container" style="padding-bottom: 30px;">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a id="create" href="#">Create</a></li>
+            <li><a id="read" href="#">Read</a></li>
+            <li><a id="update" href="#">Update</a></li>
+            <li><a id="delete" href="#">Delete</a></li>
+        </ul>
+        <h3 class="text-muted">CSCI 5409 AWS WEB SERVICE</h3>
+    </div>
+    <form class="  p-5 col-xs-10" action="#!" id="part-form" name="part-form">
+
+        <div class="form-row mb-4" id="toolbar_parameters">
+            <label class="col" for="part_no">PART Number<input name="part_no" type="number"
+                                                               id='part_no'
+                                                               type="number"
+                                                               value='0'
+                                                               step="any" min="0"></label>
+            <label class="col" for="part_desc">PART DESC<input name='part_desc'
+                                                               id='part_desc'
+                                                               type="text"
+                ></label>
+
+            <input class="col btn btn-info btn-block my-2" name='submit' type="button" id="submit"
+                   value="submit"
+            >
+            <div class="form-row mb-4 error text-danger" id="error_msg"></div>
+        </div>
+
+
+    </form>
+
+
+</div> <!-- /container -->
+
+<div class="col-md-12">
+    <div id="table" class="col-md-5" style="overflow-y:scroll;"></div>
+    <div id="log" class="col-md-5" style="overflow-y:scroll;"><%= serverResp %></div>
+
+</div>
+
+<script src="<%= static_path + "/jquery/jquery-1.11.3.min.js" %>"></script>
+<script src="<%= static_path + "/bootstrap/js/bootstrap.min.js" %>"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get("/readall", $("#part-form").serialize(),
+            function (data) {
+                console.log("success msg:", data);
+            }
+        )
+            .error(function (xhr) {
+                switch (xhr.status) {
+                    case 409:
+                        console.log("success msg:", xhr);
+                        break;
+                    default:
+                        console.log("success msg:", xhr);
+                }
+            })
+            .always(function () {
+                // $("#signupModal").modal('hide');
+            });
+
+        $("#create").click(function(){
+            $("#part_no").show();
+            $("#part_desc").show();
+        });
+        $("#read").click(function(){
+            $("#part_no").show();
+            $("#part_desc").hide();
+        });
+        $("#update").click(function(){
+            $("#part_no").show();
+            $("#part_desc").show();
+        });
+        $("#delete").click(function(){
+            $("#part_no").show();
+            $("#part_desc").hide();
+        });
+        $("#submit").click(function () {
+            let formBody = $("#part-form").serialize();
+            console.log("send req:", formBody);
+            $.post("/create", formBody,
+                function (data) {
+                    console.log("success msg:", data);
+                }
+            )
+                .error(function (xhr) {
+                    switch (xhr.status) {
+                        case 409:
+                            console.log("success msg:", xhr);
+                            break;
+                        default:
+                            console.log("success msg:", xhr);
+                    }
+                })
+                .always(function () {
+                    // $("#signupModal").modal('hide');
+                });
+        })
+    })
+</script>
+</body>
+</html>
