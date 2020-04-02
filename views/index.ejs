@@ -79,8 +79,8 @@
                 let mainObj = JSON.parse(JSON.stringify(data))['Items'];
                 for(i = 0;i < mainObj.length; i++){
                     k+= '<tr>';
-                    k+= '<td>' + mainObj[i].part_no + '</td>';
-                    k+= '<td>' + mainObj[i].part_desc + '</td>';
+                    k+= '<td>' + JSON.stringify(mainObj[i].part_no, null, 4) + '</td>';
+                    k+= '<td>' + JSON.stringify(mainObj[i].part_desc, null, 4) + '</td>';
                     k+= '</tr>';
                 }
                 k+='</tbody>';
@@ -119,6 +119,7 @@
                 case "create":
                    $.post("/create", formBody,
                         function (data) {
+                            $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );
@@ -126,6 +127,7 @@
                 case "read":
                     $.get("/read", formBody,
                         function (data) {
+                            $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );
@@ -133,6 +135,7 @@
                 case "update":
                     $.post("/update", formBody,
                         function (data) {
+                            $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );
@@ -140,6 +143,7 @@
                 case "delete":
                     $.post("/delete", formBody,
                         function (data) {
+                            $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );

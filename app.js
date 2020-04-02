@@ -99,9 +99,7 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
-                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
-                res.status(returnStatus).send({msg:serverResp});
+                res.status(returnStatus).send(err);
             } else {
                 serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
                 data.msg = serverResp;
@@ -136,9 +134,8 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
-                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
-                res.status(returnStatus).send({msg:serverResp});
+                res.status(returnStatus).send(err);
+
             } else {
                 serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
                 data.msg = serverResp;
@@ -173,9 +170,8 @@ if (cluster.isMaster) {
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
                 }
-                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
-                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
-                res.status(returnStatus).send({msg:serverResp});
+                res.status(returnStatus).send(err);
+
             } else {
                 serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
                 data.msg = serverResp;
@@ -203,9 +199,8 @@ if (cluster.isMaster) {
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
                 }
-                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
-                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
-                res.status(returnStatus).send({msg:serverResp});
+                res.status(returnStatus).send(err);
+
             } else {
                 serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
                 data.msg = serverResp;
