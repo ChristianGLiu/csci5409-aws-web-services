@@ -149,26 +149,23 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('/update', function (req, res) {
+    app.post('/update/:part_no/:part_desc', function (req, res) {
 
+        let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
+        let req_part_desc = req.body.part_desc || req.query.part_desc || req.params.part_desc;
         let params = {
             TableName: ddbTable,
             Key: {
-                'part_no': {N: req.body.part_no}
+                'part_no': {N: req_part_no}
             },
             UpdateExpression: "set part_desc = :x",
             ExpressionAttributeValues: {
-                ":x": req.body.part_desc
+                ":x": req_part_desc
             },
-            ReturnValues: "UPDATED_NEW",
-            'Expected': {part_no: {Exists: true}}
+            ReturnValues: "UPDATED_NEW"
         };
 
         ddb.update(params, function (err, data) {
-            let messageObj = {
-                'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
-                'Subject': 'updated part (' + req.body.part_desc + ')'
-            };
             if (err) {
                 console.log("Error", err);
                 let returnStatus = 500;
@@ -177,10 +174,7 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
                 res.status(returnStatus).send(err);
-
             } else {
-                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
-                data.msg = serverResp;
                 res.status(200).send(data);
             }
         });

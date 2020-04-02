@@ -143,6 +143,7 @@
         console.log("you are choosing ", mode);
         $("#submit").click(function () {
             let formBody = $("#part-form").serialize();
+            let url = '';
             console.log("send req:", formBody);
             switch(mode) {
                 case "create":
@@ -154,16 +155,18 @@
                     );
                 break;
                 case "read":
-                    let url = "/read/"+ $("#part_no_input").val();
+                    url = "/read/"+ $("#part_no_input").val();
                     console.log("read url:", url);
                     $.get(url, formBody,
                         function (data) {
                             $('#log').append("<br />GET RESULT:" + JSON.stringify(data));
                             let k = '<tbody>';
                             let mainObj = JSON.parse(JSON.stringify(data))['Item'];
+                            let part_no_val = mainObj.part_no || '';
+                            let part_desc_val = mainObj.part_desc || '';
                                 k+= '<tr>';
-                                k+= '<td>' + JSON.stringify(mainObj.part_no, null, 4) + '</td>';
-                                k+= '<td>' + JSON.stringify(mainObj.part_desc, null, 4) + '</td>';
+                                k+= '<td>' + JSON.stringify(part_no_val, null, 4) + '</td>';
+                                k+= '<td>' + JSON.stringify(part_desc_val, null, 4) + '</td>';
                                 k+= '</tr>';
                             k+='</tbody>';
                             document.getElementById('tableData').innerHTML = k;
@@ -171,6 +174,7 @@
                     );
                     break;
                 case "update":
+                    url = "/read/"+ $("#part_no_input").val() + "/" + $("#part_desc_input").val();
                     $.post("/update", formBody,
                         function (data) {
                             $('#log').html(JSON.stringify(data));
