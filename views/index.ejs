@@ -71,13 +71,12 @@
 <script src="<%= static_path + "/jquery/jquery-1.11.3.min.js" %>"></script>
 <script src="<%= static_path + "/bootstrap/js/bootstrap.min.js" %>"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
+    let scanTable = function(oldMsg) {
         $.get("/readall", $("#part-form").serialize(),
             function (data) {
-                $('#log').html("get msg:" + JSON.stringify(data, null, 4));
+                $('#log').html(oldMsg+"\r\nscan table result:" + JSON.stringify(data, null, 4));
                 let k = '<tbody>';
-                let mainObj = JSON.parse(JSON.stringify(data))['items'];
-                console.log("get all records:", JSON.parse(JSON.stringify(data)))
+                let mainObj = JSON.parse(JSON.stringify(data))['Items'];
                 for(i = 0;i < mainObj.length; i++){
                     k+= '<tr>';
                     k+= '<td>' + mainObj[i].part_no + '</td>';
@@ -87,56 +86,66 @@
                 k+='</tbody>';
                 document.getElementById('tableData').innerHTML = k;
             }
-        )
-            .error(function (xhr) {
-                switch (xhr.status) {
-                    case 409:
-                        console.log("error msg:", xhr);
-                        break;
-                    default:
-                        console.log("error msg:", xhr);
-                }
-            })
-            .always(function () {
-                // $("#signupModal").modal('hide');
-            });
+        );
+    }
+    $(document).ready(function () {
+        let mode = 'create';
+        scanTable('');
 
         $("#create").click(function () {
             $("#part_no").show();
             $("#part_desc").show();
+            mode = 'create';
         });
         $("#read").click(function () {
             $("#part_no").show();
             $("#part_desc").hide();
+            mode = 'read';
         });
         $("#update").click(function () {
             $("#part_no").show();
             $("#part_desc").show();
+            mode = 'update';
         });
         $("#delete").click(function () {
             $("#part_no").show();
             $("#part_desc").hide();
+            mode = 'delete';
         });
         $("#submit").click(function () {
             let formBody = $("#part-form").serialize();
             console.log("send req:", formBody);
-            $.post("/create", formBody,
-                function (data) {
-                    console.log("success msg:", data);
-                }
-            )
-                .error(function (xhr) {
-                    switch (xhr.status) {
-                        case 409:
-                            console.log("success msg:", xhr);
-                            break;
-                        default:
-                            console.log("success msg:", xhr);
-                    }
-                })
-                .always(function () {
-                    // $("#signupModal").modal('hide');
-                });
+            switch(mode) {
+                case "create":
+                   $.post("/create", formBody,
+                        function (data) {
+                            scanTable(JSON.stringify(data));
+                        }
+                    );
+                break;
+                case "read":
+                    $.get("/read", formBody,
+                        function (data) {
+                            scanTable(JSON.stringify(data));
+                        }
+                    );
+                    break;
+                case "update":
+                    $.post("/update", formBody,
+                        function (data) {
+                            scanTable(JSON.stringify(data));
+                        }
+                    );
+                    break;
+                case "delete":
+                    $.post("/delete", formBody,
+                        function (data) {
+                            scanTable(JSON.stringify(data));
+                        }
+                    );
+                    break;
+
+            }
         })
     })
 </script>
