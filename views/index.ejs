@@ -159,7 +159,16 @@
                     $.get(url, formBody,
                         function (data) {
                             $('#log').append("GET RESULT:" + JSON.stringify(data));
-                            scanTable(JSON.stringify(data));
+                            let k = '<tbody>';
+                            let mainObj = JSON.parse(JSON.stringify(data))['Items'];
+                            for(i = 0;i < mainObj.length; i++){
+                                k+= '<tr>';
+                                k+= '<td>' + JSON.stringify(mainObj[i].part_no, null, 4) + '</td>';
+                                k+= '<td>' + JSON.stringify(mainObj[i].part_desc, null, 4) + '</td>';
+                                k+= '</tr>';
+                            }
+                            k+='</tbody>';
+                            document.getElementById('tableData').innerHTML = k;
                         }
                     );
                     break;

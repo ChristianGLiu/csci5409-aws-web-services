@@ -121,6 +121,7 @@ if (cluster.isMaster) {
         let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
         let params = {
             AttributesToGet: [
+                "part_no",
                 "part_desc"
             ],
             TableName: ddbTable,
