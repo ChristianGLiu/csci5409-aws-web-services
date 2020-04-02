@@ -128,8 +128,6 @@ if (cluster.isMaster) {
             // }
         };
 
-        console.log("get read params:", params);
-
         ddb.getItem(params, function (err, data) {
             if (err) {
                 let returnStatus = 500;
@@ -138,7 +136,7 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                err.requests = req;
+                err['requests'] = req;
                 res.status(returnStatus).send(err);
 
             } else {
