@@ -158,15 +158,13 @@
                     console.log("read url:", url);
                     $.get(url, formBody,
                         function (data) {
-                            $('#log').append("GET RESULT:" + JSON.stringify(data));
+                            $('#log').append("<br />GET RESULT:" + JSON.stringify(data));
                             let k = '<tbody>';
-                            let mainObj = JSON.parse(JSON.stringify(data))['Items'];
-                            for(i = 0;i < mainObj.length; i++){
+                            let mainObj = JSON.parse(JSON.stringify(data))['Item'];
                                 k+= '<tr>';
-                                k+= '<td>' + JSON.stringify(mainObj[i].part_no, null, 4) + '</td>';
-                                k+= '<td>' + JSON.stringify(mainObj[i].part_desc, null, 4) + '</td>';
+                                k+= '<td>' + JSON.stringify(mainObj.part_no, null, 4) + '</td>';
+                                k+= '<td>' + JSON.stringify(mainObj.part_desc, null, 4) + '</td>';
                                 k+= '</tr>';
-                            }
                             k+='</tbody>';
                             document.getElementById('tableData').innerHTML = k;
                         }
