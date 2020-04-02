@@ -117,11 +117,11 @@ if (cluster.isMaster) {
     });
 
 
-    app.get('/read', function (req, res) {
+    app.get('/read/:part_no', function (req, res) {
         let params = {
             TableName: ddbTable,
             Key: {
-                'part_no': {N:req.params.part_no}
+                'part_no': req.params.part_no | req.body.part_no | req.query.part_no
             }
             // ,
             // 'Expected': {part_no: {Exists: true}
