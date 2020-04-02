@@ -129,24 +129,26 @@ if (cluster.isMaster) {
             // }
         };
 
-        ddb.getItem(params, function (err, data) {
-            if (err) {
-                let returnStatus = 500;
+        res.status(200).send(params);
 
-                if (err.code === 'ConditionalCheckFailedException') {
-                    returnStatus = 409;
-                }
-
-                // err['requests'] = req;
-                res.status(returnStatus).send(err);
-
-            } else {
-                serverResp += "\r\n" + JSON.stringify(data, null, 4);
-                data.msg = serverResp;
-                data.requests = req;
-                res.status(200).send(data);
-            }
-        });
+        // ddb.getItem(params, function (err, data) {
+        //     if (err) {
+        //         let returnStatus = 500;
+        //
+        //         if (err.code === 'ConditionalCheckFailedException') {
+        //             returnStatus = 409;
+        //         }
+        //
+        //         // err['requests'] = req;
+        //         res.status(returnStatus).send(err);
+        //
+        //     } else {
+        //         serverResp += "\r\n" + JSON.stringify(data, null, 4);
+        //         data.msg = serverResp;
+        //         data.requests = req;
+        //         res.status(200).send(data);
+        //     }
+        // });
     });
 
 
