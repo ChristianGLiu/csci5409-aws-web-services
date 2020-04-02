@@ -174,7 +174,7 @@
                     );
                     break;
                 case "update":
-                    url = "/read/"+ $("#part_no_input").val() + "/" + $("#part_desc_input").val();
+                    url = "/update/"+ $("#part_no_input").val() + "/" + $("#part_desc_input").val();
                     $.post(url, formBody,
                         function (data) {
                             $('#log').html(JSON.stringify(data));
