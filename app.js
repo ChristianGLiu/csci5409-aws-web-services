@@ -122,7 +122,7 @@ if (cluster.isMaster) {
         let params = {
             TableName: ddbTable,
             Key: {
-                'part_no': {N: req_part_no}
+                'part_no': req_part_no
             }
             // ,
             // 'Expected': {part_no: {Exists: true}

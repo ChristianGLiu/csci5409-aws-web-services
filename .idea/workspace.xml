@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ac9ecde-8436-4fd7-84d9-21ee71bb899c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,11 +29,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chris\OneDrive\5409\ta\tutorial\static" />
       <recent name="C:\Users\chris\OneDrive\5409\ta\tutorial" />
     </key>
   </component>
@@ -46,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1585669719544</updated>
       <workItem from="1585669722231" duration="41433000" />
-      <workItem from="1585832511591" duration="5465000" />
+      <workItem from="1585832511591" duration="5809000" />
     </task>
     <servers />
   </component>
