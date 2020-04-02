@@ -166,7 +166,7 @@ if (cluster.isMaster) {
             ReturnValues: "UPDATED_NEW"
         };
 
-        docClient.update(params, function (err, data) {
+        ddb.updateItem(params, function (err, data) {
             if (err) {
                 console.log("Error", err);
                 let returnStatus = 500;
@@ -174,7 +174,7 @@ if (cluster.isMaster) {
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
                 }
-                res.status(returnStatus).send(err);
+                res.status(200).send(err);
             } else {
                 res.status(200).send(data);
             }
