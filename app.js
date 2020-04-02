@@ -120,16 +120,14 @@ if (cluster.isMaster) {
     app.get('/read/:part_no', function (req, res) {
         let req_part_no = req.params.part_no || req.body.part_no || req.query.part_no;
         let params = {
+            AttributesToGet: [
+                "part_desc"
+            ],
             TableName: ddbTable,
             Key: {
                 "part_no": { "N" : req_part_no}
             }
-            // ,
-            // 'Expected': {part_no: {Exists: true}
-            // }
         };
-
-        // res.status(200).send(params);
 
         ddb.getItem(params, function (err, data) {
             if (err) {
@@ -143,11 +141,10 @@ if (cluster.isMaster) {
                 res.status(returnStatus).send(err);
 
             } else {
-                serverResp += "\r\n" + JSON.stringify(data, null, 4);
-                data.msg = serverResp;
-                data.requests = req;
                 res.status(200).send(data);
             }
+
+            return next();
         });
     });
 
