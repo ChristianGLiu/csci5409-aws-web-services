@@ -76,7 +76,7 @@
         $.get("/readall",{},
             function (data) {
                 $('#log').append(oldMsg)
-                $('#log').append("<br/>");
+                $('#log').append("<br/><br/>");
                 $('#log').append("Scan table result:" + JSON.stringify(data, null, 4));
                 let k = '<tbody>';
                 let mainObj = JSON.parse(JSON.stringify(data))['Items'];
@@ -177,15 +177,16 @@
                     url = "/update/"+ $("#part_no_input").val() + "/" + $("#part_desc_input").val();
                     $.post(url, formBody,
                         function (data) {
-                            $('#log').html(JSON.stringify(data));
+                            $('#log').append("<br />"+JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );
                     break;
                 case "delete":
-                    $.post("/delete", formBody,
+                    url = "/delete/"+ $("#part_no_input").val();
+                    $.post(url, formBody,
                         function (data) {
-                            $('#log').html(JSON.stringify(data));
+                            $('#log').append("<br />"+JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );

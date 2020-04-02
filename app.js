@@ -135,10 +135,6 @@ if (cluster.isMaster) {
             if (err) {
                 let returnStatus = 500;
 
-                if (err.code === 'ConditionalCheckFailedException') {
-                    returnStatus = 409;
-                }
-
                 res.status(returnStatus).send(err);
                 return next();
             } else {
@@ -171,10 +167,8 @@ if (cluster.isMaster) {
                 console.log("Error", err);
                 let returnStatus = 500;
 
-                if (err.code === 'ConditionalCheckFailedException') {
-                    returnStatus = 409;
-                }
-                res.status(200).send(err);
+                res.status(returnStatus).send(err);
+                return next();
             } else {
                 res.status(200).send(data);
             }
@@ -182,13 +176,13 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('/delete', function (req, res) {
+    app.post('/delete/:part_no?', function (req, res) {
+        let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
         let params = {
             TableName: ddbTable,
             Key: {
-                'part_no': {N: req.body.part_no}
-            },
-            'Expected': {part_no: {Exists: true}}
+                'part_no': {N: req_part_no}
+            }
         };
 
 // Call DynamoDB to delete the item from the table
@@ -197,14 +191,9 @@ if (cluster.isMaster) {
                 console.log("Error", err);
                 let returnStatus = 500;
 
-                if (err.code === 'ConditionalCheckFailedException') {
-                    returnStatus = 409;
-                }
                 res.status(returnStatus).send(err);
-
+                return next();
             } else {
-                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
-                data.msg = serverResp;
                 res.status(200).send(data);
             }
         });
