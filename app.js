@@ -170,6 +170,7 @@ if (cluster.isMaster) {
                 res.status(returnStatus).send(err);
                 return next();
             } else {
+                data['msg'] = 'successfully updated:' + req_part_no;
                 res.status(200).send(data);
             }
         });
@@ -182,8 +183,7 @@ if (cluster.isMaster) {
             TableName: ddbTable,
             Key: {
                 'part_no': {N: req_part_no}
-            },
-            ReturnValues: "UPDATED_NEW"
+            }
         };
 
 // Call DynamoDB to delete the item from the table
@@ -195,6 +195,7 @@ if (cluster.isMaster) {
                 res.status(returnStatus).send(err);
                 return next();
             } else {
+                data['msg'] = 'successfully deleted:' + req_part_no;
                 res.status(200).send(data);
             }
         });
