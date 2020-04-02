@@ -46,7 +46,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585669719544</updated>
-      <workItem from="1585669722231" duration="41125000" />
+      <workItem from="1585669722231" duration="41433000" />
+      <workItem from="1585832511591" duration="491000" />
     </task>
     <servers />
   </component>
@@ -61,22 +62,22 @@
       <screen x="0" y="0" width="1504" height="963" />
     </state>
     <state x="93" y="93" width="1319" height="777" key="DiffContextDialog/0.0.1504.963@0.0.1504.963" timestamp="1585771818270" />
-    <state width="1483" height="256" key="GridCell.Tab.0.bottom" timestamp="1585670920920">
+    <state width="1483" height="256" key="GridCell.Tab.0.bottom" timestamp="1585790577722">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.bottom/0.0.1504.963@0.0.1504.963" timestamp="1585670920920" />
-    <state width="1483" height="256" key="GridCell.Tab.0.center" timestamp="1585670920920">
+    <state width="1483" height="256" key="GridCell.Tab.0.bottom/0.0.1504.963@0.0.1504.963" timestamp="1585790577722" />
+    <state width="1483" height="256" key="GridCell.Tab.0.center" timestamp="1585790577721">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.center/0.0.1504.963@0.0.1504.963" timestamp="1585670920920" />
-    <state width="1483" height="256" key="GridCell.Tab.0.left" timestamp="1585670920919">
+    <state width="1483" height="256" key="GridCell.Tab.0.center/0.0.1504.963@0.0.1504.963" timestamp="1585790577721" />
+    <state width="1483" height="256" key="GridCell.Tab.0.left" timestamp="1585790577720">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.left/0.0.1504.963@0.0.1504.963" timestamp="1585670920919" />
-    <state width="1483" height="256" key="GridCell.Tab.0.right" timestamp="1585670920920">
+    <state width="1483" height="256" key="GridCell.Tab.0.left/0.0.1504.963@0.0.1504.963" timestamp="1585790577720" />
+    <state width="1483" height="256" key="GridCell.Tab.0.right" timestamp="1585790577721">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.right/0.0.1504.963@0.0.1504.963" timestamp="1585670920920" />
+    <state width="1483" height="256" key="GridCell.Tab.0.right/0.0.1504.963@0.0.1504.963" timestamp="1585790577721" />
     <state x="93" y="93" width="1319" height="777" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1585773118085">
       <screen x="0" y="0" width="1504" height="963" />
     </state>

@@ -30,13 +30,13 @@ if (cluster.isMaster) {
     let tableView = '';
 
 
-    let scanTable = function(req, res) {
+    let scanTable = function (req, res) {
         let params = {
             TableName: ddbTable, // give it your table name
             Select: "ALL_ATTRIBUTES"
         };
 
-        ddb.scan(params, function(err, data) {
+        ddb.scan(params, function (err, data) {
             if (err) {
                 let returnStatus = 500;
 
@@ -59,14 +59,14 @@ if (cluster.isMaster) {
 
     let ddb = new AWS.DynamoDB();
 
-    let ddbTable =  process.env.TABLE;
+    let ddbTable = process.env.TABLE;
     let app = express();
 
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
-    app.use(bodyParser.urlencoded({extended:false}));
+    app.use(bodyParser.urlencoded({extended: false}));
 
-    app.get('/', function(req, res) {
+    app.get('/', function (req, res) {
         res.render('index', {
             static_path: 'static',
             serverResp: serverResp,
@@ -77,21 +77,23 @@ if (cluster.isMaster) {
         });
     });
 
-    app.post('/create', function(req, res) {
+    app.post('/create', function (req, res) {
         let item = {
             'part_no': {'N': req.body.part_no},
             'part_desc': {'S': req.body.part_desc}
         };
 
-        let messageObj = {'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
-            'Subject': 'New part added ('+req.body.part_desc+')'};
+        let messageObj = {
+            'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
+            'Subject': 'New part added (' + req.body.part_desc + ')'
+        };
 
 
         ddb.putItem({
             'TableName': ddbTable,
             'Item': item,
-            'Expected': { part_no: { Exists: false } }
-        }, function(err, data) {
+            'Expected': {part_no: {Exists: false}}
+        }, function (err, data) {
             if (err) {
                 let returnStatus = 500;
 
@@ -110,23 +112,25 @@ if (cluster.isMaster) {
 
     });
 
-    app.get('/readall', function(req, res) {
+    app.get('/readall', function (req, res) {
         scanTable(req, res);
     });
 
 
-    app.get('/read', function(req, res) {
+    app.get('/read', function (req, res) {
         let params = {
             TableName: ddbTable,
             Key: {
                 'part_no': {N: req.body.part_no}
             },
-            'Expected': { part_no: { Exists: true } }
+            'Expected': {part_no: {Exists: true}}
         };
 
-        ddb.getItem(params, function(err, data) {
-            let messageObj = {'Message': data,
-                'Subject': 'updated part ('+req.body.part_desc+')'};
+        ddb.get(params, function (err, data) {
+            let messageObj = {
+                'Message': data,
+                'Subject': 'updated part (' + req.body.part_desc + ')'
+            };
             if (err) {
                 let returnStatus = 500;
 
@@ -145,7 +149,7 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('/update', function(req, res) {
+    app.post('/update', function (req, res) {
 
         let params = {
             TableName: ddbTable,
@@ -157,12 +161,14 @@ if (cluster.isMaster) {
                 ":x": req.body.part_desc
             },
             ReturnValues: "UPDATED_NEW",
-            'Expected': { part_no: { Exists: true } }
+            'Expected': {part_no: {Exists: true}}
         };
 
-        ddb.update(params, function(err, data) {
-            let messageObj = {'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
-                'Subject': 'updated part ('+req.body.part_desc+')'};
+        ddb.update(params, function (err, data) {
+            let messageObj = {
+                'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
+                'Subject': 'updated part (' + req.body.part_desc + ')'
+            };
             if (err) {
                 console.log("Error", err);
                 let returnStatus = 500;
@@ -181,17 +187,17 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('/delete', function(req, res) {
+    app.post('/delete', function (req, res) {
         let params = {
             TableName: ddbTable,
             Key: {
                 'part_no': {N: req.body.part_no}
             },
-            'Expected': { part_no: { Exists: true } }
+            'Expected': {part_no: {Exists: true}}
         };
 
 // Call DynamoDB to delete the item from the table
-        ddb.deleteItem(params, function(err, data) {
+        ddb.deleteItem(params, function (err, data) {
             if (err) {
                 console.log("Error", err);
                 let returnStatus = 500;
