@@ -175,7 +175,7 @@
                     break;
                 case "update":
                     url = "/read/"+ $("#part_no_input").val() + "/" + $("#part_desc_input").val();
-                    $.post("/update", formBody,
+                    $.post(url, formBody,
                         function (data) {
                             $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
