@@ -130,7 +130,7 @@ if (cluster.isMaster) {
 
         console.log("get read params:", params);
 
-        ddb.get(params, function (err, data) {
+        ddb.getItem(params, function (err, data) {
             if (err) {
                 let returnStatus = 500;
 

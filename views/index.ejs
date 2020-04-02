@@ -93,10 +93,10 @@
         scanTable('');
 
         $("#create").click(function () {
-            $("#part_no").prop('disabled', false);
-            $("#part_desc").prop('disabled', false);
-            $(".part_no").show();
-            $(".part_desc").show();
+            $("#part_no_input").prop('disabled', false);
+            $("#part_no_input").prop('disabled', false);
+            $("#part_no").show();
+            $("#part_desc").show();
             $("#create-li").addClass('active');
             $("#read-li").removeClass('active');
             $("#update-li").removeClass('active');
@@ -104,10 +104,10 @@
             mode = 'create';
         });
         $("#read").click(function () {
-            $("#part_no").prop('disabled', false);
-            $("#part_desc").prop('disabled', true);
-            $(".part_no").show();
-            $(".part_desc").hide();
+            $("#part_no_input").prop('disabled', false);
+            $("#part_no_input").prop('disabled', true);
+            $("#part_no").show();
+            $("#part_desc").hide();
             $("#create-li").removeClass('active');
             $("#read-li").addClass('active');
             $("#update-li").removeClass('active');
@@ -115,10 +115,10 @@
             mode = 'read';
         });
         $("#update").click(function () {
-            $("#part_no").prop('disabled', false);
-            $("#part_desc").prop('disabled', false);
-            $(".part_no").show();
-            $(".part_desc").show();
+            $("#part_no_input").prop('disabled', false);
+            $("#part_no_input").prop('disabled', false);
+            $("#part_no").show();
+            $("#part_desc").show();
             $("#create-li").removeClass('active');
             $("#read-li").removeClass('active');
             $("#update-li").addClass('active');
@@ -126,10 +126,10 @@
             mode = 'update';
         });
         $("#delete").click(function () {
-            $("#part_no").prop('disabled', false);
-            $("#part_desc").prop('disabled', true);
-            $(".part_no").show();
-            $(".part_desc").hide();
+            $("#part_no_input").prop('disabled', false);
+            $("#part_no_input").prop('disabled', true);
+            $("#part_no").show();
+            $("#part_desc").hide();
             $("#create-li").removeClass('active');
             $("#read-li").removeClass('active');
             $("#update-li").removeClass('active');
