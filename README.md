@@ -1,5 +1,9 @@
-# AWS Elastic Beanstalk Express Sample App
-This sample application uses the [Express](https://expressjs.com/) framework and [Bootstrap](http://getbootstrap.com/) to build a simple, scalable customer signup form that is deployed to [AWS Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The application stores data in [Amazon DynamoDB](http://aws.amazon.com/dynamodb/) and publishes notifications to the [Amazon Simple Notification Service (SNS)](http://aws.amazon.com/sns/) when a customer fills out the form.
+# CSCI 5409 CLoud COmputing Course 
+## AWS Elastic Beanstalk + DynamoDB + Nodejs Express
+This code is based on AWS official tutorial sample code https://github.com/aws-samples/eb-node-express-signup, which unfortunately using quite old AWS SDK 1.6.
+The original code only provide putItem (add) operation against to DynamoDB, plus it doesn't have capability to utilize the new AWS SDK 2.2+ DocumentClient API.
+
+Therefore, I added and enhanced the create, read, update and delete operation based on latest AWS SDK API, plus I removed unnecessary SNS function which is not required for our course.
 
 ####Sample Code REST services call specification:
 
