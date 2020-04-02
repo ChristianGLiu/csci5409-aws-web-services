@@ -139,6 +139,7 @@
             $("#delete-li").addClass('active');
             mode = 'delete';
         });
+        console.log("you are choosing ", mode);
         $("#submit").click(function () {
             let formBody = $("#part-form").serialize();
             console.log("send req:", formBody);
@@ -152,7 +153,9 @@
                     );
                 break;
                 case "read":
-                    $.get("/read/"+ $("#part_no_input").val(), formBody,
+                    let url = "/read/"+ $("#part_no_input").val();
+                    console.log("read url:", url);
+                    $.get(url, formBody,
                         function (data) {
                             $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
