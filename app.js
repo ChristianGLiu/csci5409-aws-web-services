@@ -165,20 +165,19 @@ if (cluster.isMaster) {
             ReturnValues: "UPDATED_NEW"
         };
 
-        res.status(200).send(params);
-        // ddb.update(params, function (err, data) {
-        //     if (err) {
-        //         console.log("Error", err);
-        //         let returnStatus = 500;
-        //
-        //         if (err.code === 'ConditionalCheckFailedException') {
-        //             returnStatus = 409;
-        //         }
-        //         res.status(returnStatus).send(err);
-        //     } else {
-        //         res.status(200).send(data);
-        //     }
-        // });
+        ddb.updateItem(params, function (err, data) {
+            if (err) {
+                console.log("Error", err);
+                let returnStatus = 500;
+
+                if (err.code === 'ConditionalCheckFailedException') {
+                    returnStatus = 409;
+                }
+                res.status(returnStatus).send(err);
+            } else {
+                res.status(200).send(data);
+            }
+        });
     });
 
 
