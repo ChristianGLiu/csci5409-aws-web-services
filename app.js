@@ -58,6 +58,7 @@ if (cluster.isMaster) {
     AWS.config.region = process.env.REGION;
 
     let ddb = new AWS.DynamoDB();
+    let docClient = new AWS.DynamoDB.DocumentClient();
 
     let ddbTable = process.env.TABLE;
     let app = express();
@@ -160,12 +161,12 @@ if (cluster.isMaster) {
             },
             UpdateExpression: "set part_desc = :x",
             ExpressionAttributeValues: {
-                ":x": req_part_desc
+                ":x": {S: req_part_desc}
             },
             ReturnValues: "UPDATED_NEW"
         };
 
-        ddb.updateItem(params, function (err, data) {
+        docClient.update(params, function (err, data) {
             if (err) {
                 console.log("Error", err);
                 let returnStatus = 500;
