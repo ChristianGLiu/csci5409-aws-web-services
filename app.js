@@ -137,14 +137,13 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
-                // err['requests'] = req;
                 res.status(returnStatus).send(err);
-
+                return next();
             } else {
                 res.status(200).send(data);
             }
 
-            return next();
+
         });
     });
 

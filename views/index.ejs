@@ -73,7 +73,7 @@
 <script src="<%= static_path + "/bootstrap/js/bootstrap.min.js" %>"></script>
 <script type="text/javascript">
     let scanTable = function(oldMsg) {
-        $.get("/readall", $("#part-form").serialize(),
+        $.get("/readall",{},
             function (data) {
                 $('#log').append(oldMsg)
                 $('#log').append("<br/>");
@@ -91,6 +91,7 @@
             }
         );
     }
+
     $(document).ready(function () {
         let mode = 'create';
         scanTable('');
@@ -107,6 +108,7 @@
             mode = 'create';
         });
         $("#read").click(function () {
+            mode = 'read';
             $("#part_no_input").prop('disabled', false);
             $("#part_desc_input").prop('disabled', true);
             $("#part_no").show();
@@ -115,7 +117,6 @@
             $("#read-li").addClass('active');
             $("#update-li").removeClass('active');
             $("#delete-li").removeClass('active');
-            mode = 'read';
         });
         $("#update").click(function () {
             $("#part_no_input").prop('disabled', false);
@@ -147,7 +148,7 @@
                 case "create":
                    $.post("/create", formBody,
                         function (data) {
-                            $('#log').html(JSON.stringify(data));
+                            $('#log').append(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );
@@ -157,7 +158,7 @@
                     console.log("read url:", url);
                     $.get(url, formBody,
                         function (data) {
-                            $('#log').html(JSON.stringify(data));
+                            $('#log').append("GET RESULT:" + JSON.stringify(data));
                             scanTable(JSON.stringify(data));
                         }
                     );
