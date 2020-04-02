@@ -182,7 +182,8 @@ if (cluster.isMaster) {
             TableName: ddbTable,
             Key: {
                 'part_no': {N: req_part_no}
-            }
+            },
+            ReturnValues: "UPDATED_NEW"
         };
 
 // Call DynamoDB to delete the item from the table

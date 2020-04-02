@@ -140,10 +140,11 @@
             $("#delete-li").addClass('active');
             mode = 'delete';
         });
-        console.log("you are choosing ", mode);
+
         $("#submit").click(function () {
             let formBody = $("#part-form").serialize();
             let url = '';
+            console.log("you are choosing ", mode);
             console.log("send req:", formBody);
             switch(mode) {
                 case "create":
