@@ -138,11 +138,13 @@ if (cluster.isMaster) {
                     returnStatus = 409;
                 }
 
+                err.requests = req;
                 res.status(returnStatus).send(err);
 
             } else {
                 serverResp += "\r\n" + JSON.stringify(data, null, 4);
                 data.msg = serverResp;
+                data.requests = req;
                 res.status(200).send(data);
             }
         });
