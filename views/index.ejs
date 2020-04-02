@@ -152,7 +152,7 @@
                     );
                 break;
                 case "read":
-                    $.get("/read", formBody,
+                    $.get("/read/"+ $("#part_no_input").val(), formBody,
                         function (data) {
                             $('#log').html(JSON.stringify(data));
                             scanTable(JSON.stringify(data));
