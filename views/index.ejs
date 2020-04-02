@@ -74,7 +74,9 @@
     let scanTable = function(oldMsg) {
         $.get("/readall", $("#part-form").serialize(),
             function (data) {
-                $('#log').html(oldMsg+"\r\nscan table result:" + JSON.stringify(data, null, 4));
+                $('#log').append(oldMsg)
+                $('#log').append("<br/>");
+                $('#log').append("Scan table result:" + JSON.stringify(data, null, 4));
                 let k = '<tbody>';
                 let mainObj = JSON.parse(JSON.stringify(data))['Items'];
                 for(i = 0;i < mainObj.length; i++){
@@ -93,23 +95,23 @@
         scanTable('');
 
         $("#create").click(function () {
-            $("#part_no").show();
-            $("#part_desc").show();
+            $("#part_no").prop('disabled', false).show();
+            $("#part_desc").prop('disabled', false).show();
             mode = 'create';
         });
         $("#read").click(function () {
-            $("#part_no").show();
-            $("#part_desc").hide();
+            $("#part_no").prop('disabled', false).show();
+            $("#part_desc").prop('disabled', true).hide();
             mode = 'read';
         });
         $("#update").click(function () {
-            $("#part_no").show();
-            $("#part_desc").show();
+            $("#part_no").prop('disabled', false).show();
+            $("#part_desc").prop('disabled', false).show();
             mode = 'update';
         });
         $("#delete").click(function () {
-            $("#part_no").show();
-            $("#part_desc").hide();
+            $("#part_no").prop('disabled', false).show();
+            $("#part_desc").prop('disabled', true).hide();
             mode = 'delete';
         });
         $("#submit").click(function () {

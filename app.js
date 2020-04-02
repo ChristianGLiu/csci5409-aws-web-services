@@ -119,7 +119,7 @@ if (cluster.isMaster) {
         let params = {
             TableName: ddbTable,
             Key: {
-                'order_id': {N: req.body.part_no}
+                'part_no': {N: req.body.part_no}
             },
             'Expected': { part_no: { Exists: true } }
         };
@@ -150,7 +150,7 @@ if (cluster.isMaster) {
         let params = {
             TableName: ddbTable,
             Key: {
-                'order_id': {N: req.body.part_no}
+                'part_no': {N: req.body.part_no}
             },
             UpdateExpression: "set part_desc = :x",
             ExpressionAttributeValues: {
@@ -185,9 +185,9 @@ if (cluster.isMaster) {
         let params = {
             TableName: ddbTable,
             Key: {
-                'order_id': {N: req.body.order_id}
+                'part_no': {N: req.body.part_no}
             },
-            'Expected': { order_id: { Exists: true } }
+            'Expected': { part_no: { Exists: true } }
         };
 
 // Call DynamoDB to delete the item from the table
