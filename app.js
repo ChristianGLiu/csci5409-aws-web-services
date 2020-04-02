@@ -87,7 +87,6 @@ if (cluster.isMaster) {
             'Subject': 'New part added ('+req.body.part_desc+')'};
 
 
-
         ddb.putItem({
             'TableName': ddbTable,
             'Item': item,
@@ -150,70 +149,36 @@ if (cluster.isMaster) {
 
     app.post('/update', function(req, res) {
 
-        let item = {
-            'part_no': {'N': req.body.part_no},
-            'part_desc': {'S': req.body.part_desc}
-        };
-
         let params = {
             TableName: ddbTable,
             Key: {
                 'order_id': {N: req.body.part_no}
             },
+            UpdateExpression: "set part_desc = :x",
+            ExpressionAttributeValues: {
+                ":x": req.body.part_desc
+            },
+            ReturnValues: "UPDATED_NEW",
             'Expected': { part_no: { Exists: true } }
         };
 
-// Call DynamoDB to delete the item from the table
-        ddb.deleteItem(params, function(err, data) {
-            if (err) {
-                console.log("Error", err);
-                serverResp += "\r\n" + JSON.stringify(err);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-            } else {
-                console.log("Success", data);
-                serverResp += "\r\nGetItem succeeded:" + JSON.stringify(data);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
-            }
-        });
-
-        ddb.putItem({
-            'TableName': ddbTable,
-            'Item': item,
-            'Expected': { order_id: { Exists: false } }
-        }, function(err, data) {
+        ddb.update(params, function(err, data) {
             let messageObj = {'Message': 'Part_no: ' + req.body.part_no + "\r\nPart_desc: " + req.body.part_desc,
                 'Subject': 'updated part ('+req.body.part_desc+')'};
             if (err) {
+                console.log("Error", err);
                 let returnStatus = 500;
 
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
                 }
-                serverResp += "\r\n" + JSON.stringify(err);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                serverResp += '\r\n'+JSON.stringify(err)+'\r\n';
+                console.log('DDB Error: ' + JSON.stringify(err, null, 4));
+                res.status(returnStatus).send({msg:serverResp});
             } else {
-                serverResp += "\r\nUpdateItem succeeded:" + JSON.stringify(messageObj);
-                res.render('index', {
-                    static_path: 'static',
-                    serverResp: serverResp,
-                    theme: process.env.THEME || 'flatly',
-                    flask_debug: process.env.FLASK_DEBUG || 'false'
-                });
+                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
+                data.msg = serverResp;
+                res.status(200).send(data);
             }
         });
     });
