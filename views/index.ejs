@@ -76,8 +76,8 @@
             function (data) {
                 $('#log').html("get msg:" + JSON.stringify(data, null, 4));
                 let k = '<tbody>';
-                let mainObj = JSON.parse(data)['items'];
-                console.log("get all records:", mainObj)
+                let mainObj = JSON.parse(JSON.stringify(data))['items'];
+                console.log("get all records:", JSON.parse(JSON.stringify(data)))
                 for(i = 0;i < mainObj.length; i++){
                     k+= '<tr>';
                     k+= '<td>' + mainObj[i].part_no + '</td>';
