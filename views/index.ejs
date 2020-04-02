@@ -21,23 +21,23 @@
 <div class="container" style="padding-bottom: 30px;">
     <div class="header">
         <ul class="nav nav-pills pull-right">
-            <li class="active"><a id="create" href="#">Create</a></li>
-            <li><a id="read" href="#">Read</a></li>
-            <li><a id="update" href="#">Update</a></li>
-            <li><a id="delete" href="#">Delete</a></li>
+            <li id="create-li" class="active"><a id="create" href="#">Create</a></li>
+            <li id="read-li"><a id="read" href="#">Read</a></li>
+            <li id="update-li"><a id="update" href="#">Update</a></li>
+            <li id="delete-li"><a id="delete" href="#">Delete</a></li>
         </ul>
         <h3 class="text-muted">CSCI 5409 AWS WEB SERVICE</h3>
     </div>
     <form class="  p-5 col-xs-10" action="#!" id="part-form" name="part-form">
 
-        <div class="form-row mb-4" id="toolbar_parameters">
-            <label class="col" id='part_no' for="part_no">PART Number<input name="part_no" type="number"
+        <span class="form-row mb-4" id="toolbar_parameters">
+            <span id='part_no'><label class="col"  for="part_no_input">PART Number<input id="part_no_input" name="part_no" type="number"
                                                                type="number"
                                                                value='0'
-                                                               step="any" min="0"></label>
-            <label class="col" id='part_desc' for="part_desc">PART DESC<input name='part_desc'
+                                                                                          step="any" min="0"></label></span>
+            <span id='part_desc'><label class="col" for="part_desc_input">PART DESC<input id="part_no_desc" name='part_desc'
                                                                type="text"
-                ></label>
+                    ></label></span>
 
             <input class="col btn btn-info btn-block my-2" name='submit' type="button" id="submit"
                    value="submit"
@@ -97,6 +97,10 @@
             $("#part_desc").prop('disabled', false);
             $(".part_no").show();
             $(".part_desc").show();
+            $("#create-li").addClass('active');
+            $("#read-li").removeClass('active');
+            $("#update-li").removeClass('active');
+            $("#delete-li").removeClass('active');
             mode = 'create';
         });
         $("#read").click(function () {
@@ -104,6 +108,10 @@
             $("#part_desc").prop('disabled', true);
             $(".part_no").show();
             $(".part_desc").hide();
+            $("#create-li").removeClass('active');
+            $("#read-li").addClass('active');
+            $("#update-li").removeClass('active');
+            $("#delete-li").removeClass('active');
             mode = 'read';
         });
         $("#update").click(function () {
@@ -111,6 +119,10 @@
             $("#part_desc").prop('disabled', false);
             $(".part_no").show();
             $(".part_desc").show();
+            $("#create-li").removeClass('active');
+            $("#read-li").removeClass('active');
+            $("#update-li").addClass('active');
+            $("#delete-li").removeClass('active');
             mode = 'update';
         });
         $("#delete").click(function () {
@@ -118,6 +130,10 @@
             $("#part_desc").prop('disabled', true);
             $(".part_no").show();
             $(".part_desc").hide();
+            $("#create-li").removeClass('active');
+            $("#read-li").removeClass('active');
+            $("#update-li").removeClass('active');
+            $("#delete-li").addClass('active');
             mode = 'delete';
         });
         $("#submit").click(function () {

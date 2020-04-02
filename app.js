@@ -122,15 +122,15 @@ if (cluster.isMaster) {
             TableName: ddbTable,
             Key: {
                 'part_no': {N: req.body.part_no}
-            },
-            'Expected': {part_no: {Exists: true}}
+            }
+            // ,
+            // 'Expected': {part_no: {Exists: true}
+            // }
         };
 
+        console.log("get read params:", params);
+
         ddb.get(params, function (err, data) {
-            let messageObj = {
-                'Message': data,
-                'Subject': 'updated part (' + req.body.part_desc + ')'
-            };
             if (err) {
                 let returnStatus = 500;
 
@@ -141,7 +141,7 @@ if (cluster.isMaster) {
                 res.status(returnStatus).send(err);
 
             } else {
-                serverResp += "\r\n" + JSON.stringify(messageObj, null, 4);
+                serverResp += "\r\n" + JSON.stringify(data, null, 4);
                 data.msg = serverResp;
                 res.status(200).send(data);
             }
