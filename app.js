@@ -92,7 +92,7 @@ app.get('/read/:part_no?', function (req, res) {
             let returnStatus = 500;
             res.status(returnStatus).send(err);
         } else {
-            res.status(200).send(data);
+            res.status(200).send(data['Item']);
         }
     });
 });
