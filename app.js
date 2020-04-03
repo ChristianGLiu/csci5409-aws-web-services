@@ -28,13 +28,16 @@ app.get('/readall', function (req, res) {
             let returnStatus = 500;
             res.status(returnStatus).send(JSON.stringify(err, null, 4));
         } else {
-            res.status(200).send(data);
+            res.status(200).send(data['Items']);
         }
     });
 });
 
 // create a new part (Replace: part_no with the demand part no you want to search, for example:  0 ;  Replace: part_desc with the updated value)
 app.post('/create/:part_no?/:part_desc?', function (req, res) {
+    req.body = req.body || {};
+    req.query = req.query || {};
+    req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
     let req_part_desc = req.body.part_desc || req.query.part_desc || req.params.part_desc;
 
@@ -69,6 +72,9 @@ app.post('/create/:part_no?/:part_desc?', function (req, res) {
 
 // read one part
 app.get('/read/:part_no?', function (req, res) {
+    req.body = req.body || {};
+    req.query = req.query || {};
+    req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
     let params = {
         AttributesToGet: [
@@ -93,7 +99,9 @@ app.get('/read/:part_no?', function (req, res) {
 
 // update a part (Replace: part_no with the demand part no you want to search, for example:  0 ;  Replace: part_desc with the updated value)
 app.post('/update/:part_no?/:part_desc?', function (req, res) {
-
+    req.body = req.body || {};
+    req.query = req.query || {};
+    req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
     let req_part_desc = req.body.part_desc || req.query.part_desc || req.params.part_desc;
     let params = {
@@ -121,6 +129,9 @@ app.post('/update/:part_no?/:part_desc?', function (req, res) {
 
 // delete one part
 app.post('/delete/:part_no?', function (req, res) {
+    req.body = req.body || {};
+    req.query = req.query || {};
+    req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
     let params = {
         TableName: ddbTable,
