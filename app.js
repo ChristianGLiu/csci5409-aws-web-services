@@ -3,14 +3,29 @@
  */
 
 // load required js library
-let AWS = require('aws-sdk');
 let express = require('express');
-
-// initilize the parameters of dynamodb tables
-AWS.config.region = process.env.REGION;
-let ddb = new AWS.DynamoDB();
-let ddbTable = process.env.TABLE; // comes from options.config in .ebextensions folder for best pratics, or you can directly replace it with your hardcoded table name
+let mysql = require('mysql');
 let app = express();
+
+// initlize  the parameters of connection tables`
+let con = mysql.createConnection({
+    host     : process.env.RDS_HOSTNAME || 'csci5409-part.c2vryhkngaoi.us-east-2.rds.amazonaws.com',
+    user     : process.env.RDS_USERNAME || 'admin',
+    password : process.env.RDS_PASSWORD || '12345678',
+    port     : process.env.RDS_PORT || '3306'
+});
+let db = process.env.RDS_MYSQL_DB || 'csci5409';
+let table = process.env.RDS_MYSQL_TABLE || 'part';
+// indicate default db
+let sql = "use " + db;
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Result: " + JSON.stringify(result));
+    });
+});
 
 // a empty return from root
 app.get ('/', (req, res) => {
@@ -19,16 +34,12 @@ app.get ('/', (req, res) => {
 
 // scan the table, return all the results (Method: GET, can be tested on browser directly)
 app.get('/readall', function (req, res) {
-    let params = {
-        TableName: ddbTable, // give it your table name
-        Select: "ALL_ATTRIBUTES"
-    };
-    ddb.scan(params, function (err, data) {
+    sql = "select * from " + table;
+    con.query(sql, function (err, result) {
         if (err) {
-            let returnStatus = 500;
-            res.status(returnStatus).send(JSON.stringify(err, null, 4));
+            res.status(500).send(JSON.stringify(err));
         } else {
-            res.status(200).send(data['Items']);
+            res.status(500).send(JSON.stringify(result));
         }
     });
 });
@@ -41,31 +52,13 @@ app.post('/create/:part_no?/:part_desc?', function (req, res) {
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
     let req_part_desc = req.body.part_desc || req.query.part_desc || req.params.part_desc;
 
-    let item = {
-        'part_no': {'N': req_part_no},
-        'part_desc': {'S': req_part_desc}
-    };
-
-    let messageObj = {
-        'Message': 'Part_no: ' + req_part_no + "\r\nPart_desc: " + req_part_desc,
-        'Subject': 'New part added (' + req_part_desc + ')'
-    };
-
-    ddb.putItem({
-        'TableName': ddbTable,
-        'Item': item,
-        'Expected': {part_no: {Exists: false}}
-    }, function (err, data) {
+    sql = "INSERT INTO "+ table +" SET `part_no` = "+ req_part_no +", `part_desc` = '"+ req_part_desc +"';";
+    con.query(sql, function (err, result) {
         if (err) {
-            let returnStatus = 500;
-            if (err.code === 'ConditionalCheckFailedException') {
-                returnStatus = 409;
-            }
-            res.status(returnStatus).send(err);
+            res.status(500).send(JSON.stringify(err));
         } else {
-            res.status(200).send(messageObj);
+            res.status(200).send(JSON.stringify(result));
         }
-
     });
 
 });
@@ -76,23 +69,12 @@ app.get('/read/:part_no?', function (req, res) {
     req.query = req.query || {};
     req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
-    let params = {
-        AttributesToGet: [
-            "part_no",
-            "part_desc"
-        ],
-        TableName: ddbTable,
-        Key: {
-            "part_no": { "N" : req_part_no}
-        }
-    };
-
-    ddb.getItem(params, function (err, data) {
+    sql = "select * from  "+ table +" where `part_no` = "+ req_part_no +";";
+    con.query(sql, function (err, result) {
         if (err) {
-            let returnStatus = 500;
-            res.status(returnStatus).send(err);
+            res.status(500).send(JSON.stringify(err));
         } else {
-            res.status(200).send(data['Item']);
+            res.status(200).send(JSON.stringify(result));
         }
     });
 });
@@ -104,25 +86,12 @@ app.post('/update/:part_no?/:part_desc?', function (req, res) {
     req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
     let req_part_desc = req.body.part_desc || req.query.part_desc || req.params.part_desc;
-    let params = {
-        TableName: ddbTable,
-        Key: {
-            'part_no': {N: req_part_no}
-        },
-        UpdateExpression: "set part_desc = :x",
-        ExpressionAttributeValues: {
-            ":x": {S: req_part_desc}
-        },
-        ReturnValues: "UPDATED_NEW"
-    };
-
-    ddb.updateItem(params, function (err, data) {
+    sql = "update "+ table +" SET `part_desc` = '"+ req_part_desc +"' where `part_no` = "+ req_part_no +";";
+    con.query(sql, function (err, result) {
         if (err) {
-            let returnStatus = 500;
-            res.status(returnStatus).send(err);
+            res.status(500).send(JSON.stringify(err));
         } else {
-            data['msg'] = 'successfully updated:' + req_part_no;
-            res.status(200).send(data);
+            res.status(200).send(JSON.stringify(result));
         }
     });
 });
@@ -133,21 +102,13 @@ app.post('/delete/:part_no?', function (req, res) {
     req.query = req.query || {};
     req.params = req.params || {};
     let req_part_no = req.body.part_no || req.query.part_no || req.params.part_no;
-    let params = {
-        TableName: ddbTable,
-        Key: {
-            'part_no': {N: req_part_no}
-        }
-    };
 
-// Call DynamoDB to delete the item from the table
-    ddb.deleteItem(params, function (err, data) {
+    sql = "delete from  "+ table +" where `part_no` = "+ req_part_no +";";
+    con.query(sql, function (err, result) {
         if (err) {
-            let returnStatus = 500;
-            res.status(returnStatus).send(err);
+            res.status(500).send(JSON.stringify(err));
         } else {
-            data['msg'] = 'successfully deleted:' + req_part_no;
-            res.status(200).send(data);
+            res.status(200).send(JSON.stringify(result));
         }
     });
 });

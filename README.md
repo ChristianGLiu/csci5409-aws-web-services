@@ -1,5 +1,9 @@
 # CSCI 5409 CLoud COmputing Course 
-## AWS Elastic Beanstalk + DynamoDB + Nodejs Express
+## AWS Elastic Beanstalk + DynamoDB / MySQL / No DATABSE + Nodejs Express
+
+#### NO DATABASE sample code: app-no-db.js
+#### MYSQL sample code: app.js
+#### DynamoDB.js code: app-DynamoDB.js
 This code is based on AWS official tutorial sample code https://github.com/aws-samples/eb-node-express-signup, which unfortunately using quite old AWS SDK 1.6.
 The original code only provide putItem (add) operation against to DynamoDB, plus it doesn't have capability to utilize the new AWS SDK 2.2+ DocumentClient API.
 

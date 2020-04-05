@@ -1,0 +1,18 @@
+[
+  {
+    "part_no": {
+      "N": "0"
+    },
+    "part_desc": {
+      "S": "engine"
+    }
+  },
+  {
+    "part_no": {
+      "N": "1"
+    },
+    "part_desc": {
+      "S": "windshield"
+    }
+  }
+]
