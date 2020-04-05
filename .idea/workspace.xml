@@ -2,81 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ac9ecde-8436-4fd7-84d9-21ee71bb899c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app-DynamoDB.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-no-db.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/createTable.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/part.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ebextensions/options.config" beforeDir="false" afterPath="$PROJECT_DIR$/.ebextensions/options.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/AUTHORS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/LICENSE-W3C.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/component.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/big-not-pretty.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/example.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/get-products.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/hello-world.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/not-pretty.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/pretty-print.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/shopping.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/strict.dtd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/examples/test.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/lib/sax.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/attribute-name.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/buffer-overrun.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/case.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/cdata-chunked.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/cdata-end-split.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/cdata-fake-end.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/cdata-multiple.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/cdata.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/cyrillic.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/duplicate-attribute.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/entities.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/entity-mega.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/issue-23.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/issue-30.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/issue-35.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/issue-47.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/issue-49.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/issue-84.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/parser-position.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/script-close-better.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/self-closing-child-strict.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/self-closing-child.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/self-closing-tag.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/stray-ending.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/trailing-attribute-no-value.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/trailing-non-whitespace.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/unclosed-root.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/unquoted.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-issue-41.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-rebinding.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-strict.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-unbound.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-xml-default-ns.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-xml-default-prefix-attribute.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-xml-default-prefix.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/sax/test/xmlns-xml-default-redefine.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/83.coffee" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/canon.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/lib/xml2js.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/text.coffee" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/aws-sdk/node_modules/xml2js/text.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/npm-shrinkwrap.json" beforeDir="false" afterPath="$PROJECT_DIR$/npm-shrinkwrap.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/createTable.sql" beforeDir="false" afterPath="$PROJECT_DIR$/createTable.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +51,8 @@
       <workItem from="1585861461317" duration="273000" />
       <workItem from="1585930335119" duration="5376000" />
       <workItem from="1586037868497" duration="6320000" />
-      <workItem from="1586090938108" duration="5306000" />
+      <workItem from="1586090938108" duration="6020000" />
+      <workItem from="1586120552592" duration="1612000" />
     </task>
     <servers />
   </component>
@@ -144,22 +72,22 @@
       <screen x="0" y="0" width="1504" height="963" />
     </state>
     <state x="93" y="93" width="1319" height="777" key="DiffContextDialog/0.0.1504.963@0.0.1504.963" timestamp="1585771818270" />
-    <state width="1483" height="256" key="GridCell.Tab.0.bottom" timestamp="1586091805299">
+    <state width="1483" height="256" key="GridCell.Tab.0.bottom" timestamp="1586120470002">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.bottom/0.0.1504.963@0.0.1504.963" timestamp="1586091805299" />
-    <state width="1483" height="256" key="GridCell.Tab.0.center" timestamp="1586091805297">
+    <state width="1483" height="256" key="GridCell.Tab.0.bottom/0.0.1504.963@0.0.1504.963" timestamp="1586120470002" />
+    <state width="1483" height="256" key="GridCell.Tab.0.center" timestamp="1586120470001">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.center/0.0.1504.963@0.0.1504.963" timestamp="1586091805297" />
-    <state width="1483" height="256" key="GridCell.Tab.0.left" timestamp="1586091805297">
+    <state width="1483" height="256" key="GridCell.Tab.0.center/0.0.1504.963@0.0.1504.963" timestamp="1586120470001" />
+    <state width="1483" height="256" key="GridCell.Tab.0.left" timestamp="1586120469999">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.left/0.0.1504.963@0.0.1504.963" timestamp="1586091805297" />
-    <state width="1483" height="256" key="GridCell.Tab.0.right" timestamp="1586091805297">
+    <state width="1483" height="256" key="GridCell.Tab.0.left/0.0.1504.963@0.0.1504.963" timestamp="1586120469999" />
+    <state width="1483" height="256" key="GridCell.Tab.0.right" timestamp="1586120470001">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state width="1483" height="256" key="GridCell.Tab.0.right/0.0.1504.963@0.0.1504.963" timestamp="1586091805297" />
+    <state width="1483" height="256" key="GridCell.Tab.0.right/0.0.1504.963@0.0.1504.963" timestamp="1586120470001" />
     <state x="93" y="93" width="1319" height="777" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1585934343506">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
