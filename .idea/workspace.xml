@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ac9ecde-8436-4fd7-84d9-21ee71bb899c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npm-shrinkwrap.json" beforeDir="false" afterPath="$PROJECT_DIR$/npm-shrinkwrap.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +33,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sls-az-func-rest-api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../MCS thesis/source-code/My-Marketplace-on-Blockchain-Via-Smart-Contract" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -55,7 +60,11 @@
       <workItem from="1586090938108" duration="6020000" />
       <workItem from="1586120552592" duration="1971000" />
       <workItem from="1586426422282" duration="1609000" />
-      <workItem from="1586994070944" duration="5862000" />
+      <workItem from="1586994070944" duration="7085000" />
+      <workItem from="1587935122620" duration="663000" />
+      <workItem from="1590013242908" duration="3434000" />
+      <workItem from="1590063948844" duration="795000" />
+      <workItem from="1590075130569" duration="9374000" />
     </task>
     <servers />
   </component>
@@ -71,14 +80,18 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="502" y="285" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590092027478">
+      <screen x="0" y="0" width="1504" height="963" />
+    </state>
+    <state x="502" y="285" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1504.963@0.0.1504.963" timestamp="1590092027478" />
     <state x="93" y="93" width="1319" height="777" key="DiffContextDialog" timestamp="1585771818270">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
     <state x="93" y="93" width="1319" height="777" key="DiffContextDialog/0.0.1504.963@0.0.1504.963" timestamp="1585771818270" />
-    <state x="533" y="237" key="FileChooserDialogImpl" timestamp="1586994080290">
+    <state x="533" y="237" key="FileChooserDialogImpl" timestamp="1587935786725">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state x="533" y="237" key="FileChooserDialogImpl/0.0.1504.963@0.0.1504.963" timestamp="1586994080290" />
+    <state x="533" y="237" key="FileChooserDialogImpl/0.0.1504.963@0.0.1504.963" timestamp="1587935786725" />
     <state width="1483" height="256" key="GridCell.Tab.0.bottom" timestamp="1586120470002">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
