@@ -1,6 +1,6 @@
 # CSCI 5409 CLoud COmputing Course 
 ## AWS Elastic Beanstalk + DynamoDB / MySQL / No DATABSE + Nodejs Express
-##### (note: I created this tutorials as course materials, so basically it is free to use for any education purpose. )
+#### (note: I created this tutorials for course materials as teaching assistant, so it is recommended to use for education only)
 
 #### NO DATABASE sample code: app-no-db.js
 #### MYSQL sample code: app.js
