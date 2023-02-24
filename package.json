@@ -8,7 +8,7 @@
     "ejs": "latest",
     "express": "latest",
     "mysql": "latest",
-    "sequelize": "^5.21.10"
+    "sequelize": "^6.29.0"
   },
   "scripts": {
     "start": "node app.js"
